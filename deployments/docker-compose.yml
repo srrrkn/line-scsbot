@@ -5,7 +5,7 @@ services:
     - ../db/initdb.d:/docker-entrypoint-initdb.d
     - ../db/data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
   app:
     image: line-scs-bot:latest 
     volumes:

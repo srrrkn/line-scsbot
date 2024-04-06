@@ -60,8 +60,8 @@ func main() {
 	// DB接続設定
 	c := mysql.Config{
 		DBName:    "scsbot",
-		User:      "root",
-		Passwd:    "pass",
+		User:      os.Getenv("MYSQL_USER"),
+		Passwd:    os.Getenv("MYSQL_USER_PASSWORD"),
 		Addr:      "db:3306",
 		Net:       "tcp",
 		ParseTime: true,
