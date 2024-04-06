@@ -13,4 +13,6 @@ services:
       - ./.env:/.env
     depends_on:
       - db
+    ports:
+      - ${PORT}:80
     tty: true

@@ -12,7 +12,7 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 
 func handleRequests() {
 	http.HandleFunc("/webhook", reflectReply)
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	log.Fatal(http.ListenAndServe(":80", nil))
 }
 
 func main() {
