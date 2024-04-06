@@ -9,14 +9,7 @@ import (
 func reflectReply(w http.ResponseWriter, r *http.Request){
 	fmt.Fprintf(w, "Test!")
 	fmt.Println("test")
-	// リクエストボディの読み取り
-	var requestBody RequestBody
-	err := json.NewDecoder(r.Body).Decode(&requestBody)
-	if err != nil {
-		http.Error(w, "リクエストの解析に失敗しました", http.StatusBadRequest)
-		return
-	}
-	fmt.Println(requestBody)
+	fmt.Println(r.body)
 }
 
 func handleRequests() {
