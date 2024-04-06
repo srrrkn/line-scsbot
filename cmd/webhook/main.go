@@ -9,7 +9,7 @@ import (
 func reflectReply(w http.ResponseWriter, r *http.Request){
 	fmt.Fprintf(w, "Test!")
 	fmt.Println("test")
-	fmt.Println(r.body)
+	fmt.Println(r.Body)
 }
 
 func handleRequests() {
