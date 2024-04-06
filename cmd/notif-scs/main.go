@@ -15,7 +15,7 @@ import (
 
 func main() {
 	// .envの読み込み
-	err := godotenv.Load("../.env")
+	err := godotenv.Load("/.env")
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
