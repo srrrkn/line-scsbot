@@ -11,8 +11,7 @@ services:
     volumes:
       - ../cmd:/go/cmd
       - ./.env:/.env
-      - ./letsencrypt.crt:/go/cmd/webhook/letsencrypt.crt
-      - ./letsencrypt.key:/go/cmd/webhook/letsencrypt.key
+      - ./ssl:/ssl
     depends_on:
       - db
     ports:

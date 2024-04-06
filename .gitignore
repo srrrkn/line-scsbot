@@ -23,4 +23,5 @@ go.work
 # other
 /db/data
 /deployments/.env
+/deployments/ssl
 /memo.md
