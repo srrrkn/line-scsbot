@@ -1,0 +1,77 @@
+{
+  "type": "bubble",
+  "size": "mega",
+  "direction": "ltr",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "【安否確認】",
+        "color": "#191970",
+        "weight": "bold",
+        "gravity": "top",
+        "decoration": "none",
+        "size": "20px"
+      },
+      {
+        "type": "text",
+        "text": "定期安否確認の時刻になりました。下記ボタンで応答してください。応答がない場合、15分後に再通知されます。",
+        "wrap": true,
+        "margin": "10px"
+      },
+      {
+        "type": "separator",
+        "margin": "15px"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "快適",
+          "text": "快適です。"
+        },
+        "margin": "5px"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "ほぼ快適",
+          "text": "ほぼ快適です。"
+        },
+        "margin": "5px"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "やや体調が悪い",
+          "text": "やや体調が悪いです。"
+        },
+        "margin": "5px"
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "体調が悪い",
+          "text": "体調が悪いです。"
+        },
+        "margin": "5px"
+      }
+    ]
+  },
+  "styles": {
+    "hero": {
+      "separator": false
+    },
+    "body": {
+      "backgroundColor": "#ffffe0"
+    },
+    "footer": {
+      "separator": false
+    }
+  }
+}

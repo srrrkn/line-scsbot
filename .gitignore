@@ -19,3 +19,7 @@
 
 # Go workspace file
 go.work
+
+# other
+/db/data
+/deployments/.env

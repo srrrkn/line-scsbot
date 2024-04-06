@@ -1,0 +1,15 @@
+services:
+  db:
+    image: mysql:latest
+    volumes:
+    - ../db/initdb.d:/docker-entrypoint-initdb.d
+    - ../db/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+  app:
+    image: line-scs-bot:latest 
+    volumes:
+      - ../cmd:/go/cmd
+    depends_on:
+      - db
+    tty: true
