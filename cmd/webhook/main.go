@@ -5,9 +5,9 @@ import (
         "log"
         "net/http"
 		"encoding/json"
-		// "database/sql"
-		// "github.com/go-sql-driver/mysql"
-		// "time"
+		"database/sql"
+		"github.com/go-sql-driver/mysql"
+		"time"
 		"os"
 		"github.com/joho/godotenv"
 )
@@ -37,7 +37,7 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 	}
 	fmt.Println(reply)
 	// グループID、ユーザーID両方存在している場合のみ実行
-	if reply.Events.Source.GroupId == "" || reply.Events.Source.UserId == "" {
+	if reply.Events[0].Source.GroupID == "" || reply.Events[0].Source.UserID == "" {
 		fmt.Println(err.Error())
 		return
 	}
@@ -67,8 +67,8 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 	// 通知イベントをDBに記録
 	result, err := db.Exec(
 		`update notif_event set replyed_at = now() where group_id = ? and ( target_user = ? or target_user is null or target_user = "" ) and invalid = 0;`,
-		reply.Events.Source.GroupId,
-		reply.Events.Source.UserId,
+		reply.Events[0].Source.GroupID,
+		reply.Events[0].Source.UserID,
 	)
 	if err != nil {
 		fmt.Println(err.Error())
