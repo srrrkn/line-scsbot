@@ -51,10 +51,13 @@ CREATE TABLE notif_event (
     group_id VARCHAR(255) NOT NULL,
     target_user VARCHAR(255) NOT NULL,
     invalid TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    last_notified_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     replyed_at TIMESTAMP NULL DEFAULT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     INDEX(group_id),
+    INDEX(last_notified_at),
+    INDEX(updated_at),
     INDEX(invalid)
 );
