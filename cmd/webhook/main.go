@@ -10,6 +10,8 @@ import (
 		"time"
 		"os"
 		"github.com/joho/godotenv"
+		"github.com/line/line-bot-sdk-go/v8/linebot/messaging_api"
+		"github.com/google/uuid"
 )
 
 type Reply struct {
@@ -82,6 +84,38 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	fmt.Println(rowsAffected)
+	if rowsAffected > 0 {
+		// LINE BotのChannel SecretとChannel Access Tokenを設定
+		bot, err := messaging_api.NewMessagingApiAPI(
+			os.Getenv("CHANNEL_TOKEN"),
+		)
+		if err != nil {
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
+		uu, err := uuid.NewRandom()
+        if err != nil {
+                fmt.Println(err)
+                return
+        }
+		// 返答を送信
+		resp, err := bot.PushMessage(
+			&messaging_api.PushMessageRequest{
+				To: reply.Events[0].Source.GroupID,
+				Messages: []messaging_api.MessageInterface{
+					messaging_api.TextMessage{
+						Text: "回答ありがとうございます。",
+					},
+				},
+			},
+			uu.String(),
+		)
+		fmt.Println(resp)
+		if err != nil {
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
+	}
 }
 
 func handleRequests() {

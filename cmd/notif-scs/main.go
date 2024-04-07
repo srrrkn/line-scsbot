@@ -88,35 +88,5 @@ func main() {
 		}
 		fmt.Println(rowsAffected)
 	}
-	// // DBから通知先グループ取得
-	// rows, err := db.Query(`select group_name, group_id from scsbot.line_group where invalid = 0`)
-	// if err != nil {
-    //     fmt.Println(err.Error())
-    //     os.Exit(1)
-    // }
-	// // 対象グループ全てに通知送信
-	// for rows.Next() {
-    //     var group_id string
-	// 	var group_name string
-    //     rows.Scan(&group_name, &group_id)
-	// 	fmt.Println(group_name, group_id)
-	// 	// メッセージjsonの読み込み
-	// 	raw, err := ioutil.ReadFile("./template.json")
-	// 	if err != nil {
-	// 		fmt.Println(err.Error())
-	// 		os.Exit(1)
-	// 	}
-	// 	// グループへの安否確認送信
-	// 	contents, err := linebot.UnmarshalFlexMessageJSON([]byte(raw))
-	// 	resp, err := bot.PushMessage(
-	// 		group_id,
-	// 		linebot.NewFlexMessage("安否確認への回答をお願いします", contents),
-	// 	).Do()
-	// 	fmt.Println(resp)
-	// 	if err != nil {
-	// 		fmt.Println(err.Error())
-	// 		os.Exit(1)
-	// 	}
-    // }
 }
 
