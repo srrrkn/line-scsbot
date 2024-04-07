@@ -25,3 +25,7 @@ go.work
 /deployments/.env
 /deployments/ssl
 /memo.md
+/cmd/notif-scs/main
+/cmd/notif-scs/main
+/cmd/snooze-scs/main
+/cmd/webhook/main
