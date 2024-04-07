@@ -26,11 +26,15 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 	fmt.Fprintln(w, string(body))
 	// グループID、ユーザーID取得
 	var reply Reply
-	json.NewDecoder(r.Body).Decode(&reply)
+	err := json.NewDecoder(r.Body).Decode(&reply)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
 	fmt.Println(reply)
 	// グループID、ユーザーID両方存在している場合のみ実行
 	if reply.GroupId == "" || reply.UserId == "" {
-		http.Error(w, "グループID、ユーザーIDが必要です。", http.StatusBadRequest)
+		fmt.Println(err.Error())
 		return
 	}
 	// ロケーション設定
@@ -58,18 +62,18 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 	fmt.Println("db connected!!")
 	// 通知イベントをDBに記録
 	result, err := db.Exec(
-		`update notif_event set replyed_at = now() where group_id = ? and ( target_user = ? or target_user is null or target_user = "" ) and invalid=0`,
+		`update notif_event set replyed_at = now() where group_id = ? and ( target_user = ? or target_user is null or target_user = "" ) and invalid = 0;`,
 		reply.GroupId,
 		reply.UserId,
 	)
 	if err != nil {
 		fmt.Println(err.Error())
-		os.Exit(1)
+		return
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
 		fmt.Println(err.Error())
-		os.Exit(1)
+		return
 	}
 	fmt.Println(rowsAffected)
 }
