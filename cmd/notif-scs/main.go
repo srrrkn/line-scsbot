@@ -11,6 +11,7 @@ import (
 	"flag"
 	"github.com/joho/godotenv"
 	"strings"
+	"path/filepath"
 )
 
 func main() {
@@ -35,7 +36,7 @@ func main() {
 	flag.Parse()
 	user_ids := strings.Split(*str_user_ids, ",")
 	// メッセージjsonの読み込み
-	raw, err := ioutil.ReadFile("./template.json")
+	raw, err := ioutil.ReadFile("/go/cmd/notif-scs/template.json")
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
