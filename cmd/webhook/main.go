@@ -5,9 +5,9 @@ import (
         "log"
         "net/http"
 		"encoding/json"
-		"database/sql"
-		"github.com/go-sql-driver/mysql"
-		"time"
+		// "database/sql"
+		// "github.com/go-sql-driver/mysql"
+		// "time"
 		"os"
 		"github.com/joho/godotenv"
 )
