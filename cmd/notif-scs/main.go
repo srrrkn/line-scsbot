@@ -11,7 +11,6 @@ import (
 	"flag"
 	"github.com/joho/godotenv"
 	"strings"
-	"path/filepath"
 )
 
 func main() {
