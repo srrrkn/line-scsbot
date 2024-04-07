@@ -32,50 +32,50 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	fmt.Println(reply)
-	// グループID、ユーザーID両方存在している場合のみ実行
-	if reply.GroupId == "" || reply.UserId == "" {
-		fmt.Println(err.Error())
-		return
-	}
-	// ロケーション設定
-	jst, err := time.LoadLocation("Asia/Tokyo")
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
-	// DB接続設定
-	c := mysql.Config{
-		DBName:    "scsbot",
-		User:      os.Getenv("MYSQL_USER"),
-		Passwd:    os.Getenv("MYSQL_USER_PASSWORD"),
-		Addr:      "db:3306",
-		Net:       "tcp",
-		ParseTime: true,
-		Collation: "utf8mb4_unicode_ci",
-		Loc:       jst,
-	}
-	db, err := sql.Open("mysql", c.FormatDSN())
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
-	fmt.Println("db connected!!")
-	// 通知イベントをDBに記録
-	result, err := db.Exec(
-		`update notif_event set replyed_at = now() where group_id = ? and ( target_user = ? or target_user is null or target_user = "" ) and invalid = 0;`,
-		reply.GroupId,
-		reply.UserId,
-	)
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
-	rowsAffected, err := result.RowsAffected()
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
-	fmt.Println(rowsAffected)
+	// // グループID、ユーザーID両方存在している場合のみ実行
+	// if reply.GroupId == "" || reply.UserId == "" {
+	// 	fmt.Println(err.Error())
+	// 	return
+	// }
+	// // ロケーション設定
+	// jst, err := time.LoadLocation("Asia/Tokyo")
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// 	os.Exit(1)
+	// }
+	// // DB接続設定
+	// c := mysql.Config{
+	// 	DBName:    "scsbot",
+	// 	User:      os.Getenv("MYSQL_USER"),
+	// 	Passwd:    os.Getenv("MYSQL_USER_PASSWORD"),
+	// 	Addr:      "db:3306",
+	// 	Net:       "tcp",
+	// 	ParseTime: true,
+	// 	Collation: "utf8mb4_unicode_ci",
+	// 	Loc:       jst,
+	// }
+	// db, err := sql.Open("mysql", c.FormatDSN())
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// 	os.Exit(1)
+	// }
+	// fmt.Println("db connected!!")
+	// // 通知イベントをDBに記録
+	// result, err := db.Exec(
+	// 	`update notif_event set replyed_at = now() where group_id = ? and ( target_user = ? or target_user is null or target_user = "" ) and invalid = 0;`,
+	// 	reply.GroupId,
+	// 	reply.UserId,
+	// )
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// 	return
+	// }
+	// rowsAffected, err := result.RowsAffected()
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// 	return
+	// }
+	// fmt.Println(rowsAffected)
 }
 
 func handleRequests() {
