@@ -18,12 +18,6 @@ type Reply struct {
 }
 
 func reflectReply(w http.ResponseWriter, r *http.Request){
-	// .envの読み込み
-	err := godotenv.Load("/.env")
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
 	// request bodyをそのままresponseとして返す
 	len := r.ContentLength
 	body := make([]byte, len)
@@ -84,5 +78,11 @@ func handleRequests() {
 }
 
 func main() {
+	// .envの読み込み
+	err := godotenv.Load("/.env")
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
 	handleRequests()
 }
