@@ -65,7 +65,7 @@ func main() {
 			join scheduling s on g.id = s.line_group_id and s.invalid = 0
 			where e.invalid = 0 
 			and DATE_ADD(e.last_notified_at, INTERVAL s.snooze_interval_minutes MINUTE) < now()
-			and DATE_ADD(e.last_notified_at, INTERVAL s.snooze_limit_minutes MINUTE) > now()
+			and DATE_ADD(e.created_at, INTERVAL s.snooze_limit_minutes MINUTE) > now()
 			and replyed_at is null
 			group by e.group_id;
 		`)
