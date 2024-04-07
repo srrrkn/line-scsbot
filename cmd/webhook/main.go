@@ -18,12 +18,12 @@ type Reply struct {
 }
 
 func reflectReply(w http.ResponseWriter, r *http.Request){
-	// request bodyをそのままresponseとして返す
-	len := r.ContentLength
-	body := make([]byte, len)
-	r.Body.Read(body)
-	fmt.Println(string(body))
-	fmt.Fprintln(w, string(body))
+	// // request bodyをそのままresponseとして返す
+	// len := r.ContentLength
+	// body := make([]byte, len)
+	// r.Body.Read(body)
+	// fmt.Println(string(body))
+	// fmt.Fprintln(w, string(body))
 	// グループID、ユーザーID取得
 	var reply Reply
 	err := json.NewDecoder(r.Body).Decode(&reply)
