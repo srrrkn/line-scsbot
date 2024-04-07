@@ -66,7 +66,9 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 	fmt.Println("db connected!!")
 	// 通知イベントをDBに記録
 	result, err := db.Exec(
-		`update notif_event set replyed_at = now() where group_id = ? and ( target_user = ? or target_user is null or target_user = "" ) and invalid = 0;`,
+		`update notif_event set replyed_at = now() where group_id = ? 
+		and ( target_user = ? or target_user is null or target_user = "" ) 
+		and invalid = 0 and replyed_at is null;`,
 		reply.Events[0].Source.GroupID,
 		reply.Events[0].Source.UserID,
 	)
