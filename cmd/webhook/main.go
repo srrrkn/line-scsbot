@@ -27,6 +27,7 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 	// グループID、ユーザーID取得
 	var reply Reply
 	json.NewDecoder(r.Body).Decode(&reply)
+	fmt.Println(reply)
 	// グループID、ユーザーID両方存在している場合のみ実行
 	if reply.GroupId == "" || reply.UserId == "" {
 		http.Error(w, "グループID、ユーザーIDが必要です。", http.StatusBadRequest)
