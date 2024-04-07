@@ -22,6 +22,7 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
+	fmt.Println(string(body))
 	fmt.Fprintln(w, string(body))
 	// グループID、ユーザーID取得
 	var reply Reply
@@ -56,7 +57,7 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 	fmt.Println("db connected!!")
 	// 通知イベントをDBに記録
 	result, err := db.Exec(
-		`update notif_event set replyed_at = now() where group_id = ? and ( user_id = ? or user_id is null or user_id = "") and invalid=0`,
+		`update notif_event set replyed_at = now() where group_id = ? and ( target_user = ? or target_user is null or target_user = "" ) and invalid=0`,
 		reply.GroupId,
 		reply.UserId,
 	)
