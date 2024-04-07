@@ -91,7 +91,7 @@ func main() {
 		}
 		// 最終通知時刻を更新
 		result, err := db.Exec(
-			`update notif_event set last_notified_at = now() where group_id = ?`,
+			`update notif_event set last_notified_at = now() where group_id = ? and replyed_at is null and invalid = 0`,
 			group_id,
 		)
 		if err != nil {
