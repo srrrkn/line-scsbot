@@ -113,7 +113,7 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 		// )
 		resp, err := bot.ReplyMessage(
 			&messaging_api.ReplyMessageRequest{
-				ReplyToken: reply.ReplyToken,
+				ReplyToken: reply.Events[0].ReplyToken,
 				Messages: []messaging_api.MessageInterface{
 					messaging_api.TextMessage{
 						Text: "回答ありがとうございます。",
