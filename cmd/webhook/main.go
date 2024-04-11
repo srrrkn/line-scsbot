@@ -11,7 +11,7 @@ import (
 		"os"
 		"github.com/joho/godotenv"
 		"github.com/line/line-bot-sdk-go/v8/linebot/messaging_api"
-		"github.com/google/uuid"
+		// "github.com/google/uuid"
 )
 
 type Reply struct {
@@ -94,11 +94,11 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 			fmt.Println(err.Error())
 			os.Exit(1)
 		}
-		uu, err := uuid.NewRandom()
-        if err != nil {
-                fmt.Println(err)
-                return
-        }
+		// uu, err := uuid.NewRandom()
+        // if err != nil {
+        //         fmt.Println(err)
+        //         return
+        // }
 		// 返答を送信
 		// resp, err := bot.PushMessage(
 		// 	&messaging_api.PushMessageRequest{
