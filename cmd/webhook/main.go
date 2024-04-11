@@ -20,6 +20,7 @@ type Reply struct {
 			GroupID string `json:"groupId"`
 			UserID  string `json:"userId"`
 		} `json:"source"`
+		ReplyToken string `json:"replyToken"`
 	} `json:"events"`
 }
 
@@ -30,7 +31,7 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 	// r.Body.Read(body)
 	// fmt.Println(string(body))
 	// fmt.Fprintln(w, string(body))
-	// グループID、ユーザーID取得
+	// body取得
 	var reply Reply
 	err := json.NewDecoder(r.Body).Decode(&reply)
 	if err != nil {
@@ -38,11 +39,11 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	fmt.Println(reply)
-	// グループID、ユーザーID両方存在している場合のみ実行
-	if reply.Events[0].Source.GroupID == "" || reply.Events[0].Source.UserID == "" {
-		fmt.Println(err.Error())
-		return
-	}
+	// // グループID、ユーザーID両方存在している場合のみ実行
+	// if reply.Events[0].Source.GroupID == "" || reply.Events[0].Source.UserID == "" {
+	// 	fmt.Println(err.Error())
+	// 	return
+	// }
 	// ロケーション設定
 	jst, err := time.LoadLocation("Asia/Tokyo")
 	if err != nil {
@@ -99,16 +100,26 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
                 return
         }
 		// 返答を送信
-		resp, err := bot.PushMessage(
-			&messaging_api.PushMessageRequest{
-				To: reply.Events[0].Source.GroupID,
+		// resp, err := bot.PushMessage(
+		// 	&messaging_api.PushMessageRequest{
+		// 		To: reply.Events[0].Source.GroupID,
+		// 		Messages: []messaging_api.MessageInterface{
+		// 			messaging_api.TextMessage{
+		// 				Text: "回答ありがとうございます。",
+		// 			},
+		// 		},
+		// 	},
+		// 	uu.String(),
+		// )
+		resp, err := bot.ReplyMessage(
+			&messaging_api.ReplyMessageRequest{
+				ReplyToken: reply.ReplyToken,
 				Messages: []messaging_api.MessageInterface{
 					messaging_api.TextMessage{
 						Text: "回答ありがとうございます。",
 					},
 				},
 			},
-			uu.String(),
 		)
 		fmt.Println(resp)
 		if err != nil {
