@@ -55,7 +55,7 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 		DBName:    "scsbot",
 		User:      os.Getenv("MYSQL_USER"),
 		Passwd:    os.Getenv("MYSQL_USER_PASSWORD"),
-		Addr:      "db:3306",
+		Addr:      "line-scs-bot-db:3306",
 		Net:       "tcp",
 		ParseTime: true,
 		Collation: "utf8mb4_unicode_ci",
