@@ -16,8 +16,9 @@ services:
       - ./ssl:/ssl
     depends_on:
       - line-scs-bot-db
-    expose:
-      - "80"
+    ports:
+      - ${HTTP_PORT}:80
+      - ${HTTPS_PORT}:443
     tty: true
     networks:
       - nsnetwork
