@@ -22,8 +22,6 @@ services:
     tty: true
     networks:
       - nsnetwork
-    expose:
-      - "80"
 
 networks:
   nsnetwork:
