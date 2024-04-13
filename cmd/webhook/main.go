@@ -127,6 +127,3 @@ func main() {
 	}
 	handleRequests()
 }
-
-/root/line-scsbot/deployments/ssl/letsencrypt-all.crt 
-/root/line-scsbot/deployments/ssl/letsencrypt.key 
