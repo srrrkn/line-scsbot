@@ -94,23 +94,6 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 			fmt.Println(err.Error())
 			os.Exit(1)
 		}
-		// uu, err := uuid.NewRandom()
-        // if err != nil {
-        //         fmt.Println(err)
-        //         return
-        // }
-		// 返答を送信
-		// resp, err := bot.PushMessage(
-		// 	&messaging_api.PushMessageRequest{
-		// 		To: reply.Events[0].Source.GroupID,
-		// 		Messages: []messaging_api.MessageInterface{
-		// 			messaging_api.TextMessage{
-		// 				Text: "回答ありがとうございます。",
-		// 			},
-		// 		},
-		// 	},
-		// 	uu.String(),
-		// )
 		resp, err := bot.ReplyMessage(
 			&messaging_api.ReplyMessageRequest{
 				ReplyToken: reply.Events[0].ReplyToken,
@@ -131,7 +114,8 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 
 func handleRequests() {
 	http.HandleFunc("/webhook", reflectReply)
-	log.Fatal(http.ListenAndServeTLS(":443", "/ssl/letsencrypt-all.crt", "/ssl/letsencrypt.key", nil))
+	// log.Fatal(http.ListenAndServeTLS(":443", "/ssl/letsencrypt-all.crt", "/ssl/letsencrypt.key", nil))
+	log.Fatal(http.ListenAndServe(":80", nil))
 }
 
 func main() {
@@ -143,3 +127,6 @@ func main() {
 	}
 	handleRequests()
 }
+
+/root/line-scsbot/deployments/ssl/letsencrypt-all.crt 
+/root/line-scsbot/deployments/ssl/letsencrypt.key 
