@@ -1,0 +1,9 @@
+{
+    "name": "line-scsbot",
+    "build": {
+        "context": "..",
+        "dockerfile": "../build/Dockerfile"
+    },
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+}

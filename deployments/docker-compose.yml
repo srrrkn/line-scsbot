@@ -11,9 +11,7 @@ services:
   line-scs-bot-app:
     image: line-scs-bot:latest 
     volumes:
-      - ../cmd:/go/cmd
       - ./.env:/.env
-      - ./ssl:/ssl
     depends_on:
       - line-scs-bot-db
     ports:

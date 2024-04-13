@@ -39,11 +39,6 @@ func reflectReply(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	fmt.Println(reply)
-	// // グループID、ユーザーID両方存在している場合のみ実行
-	// if reply.Events[0].Source.GroupID == "" || reply.Events[0].Source.UserID == "" {
-	// 	fmt.Println(err.Error())
-	// 	return
-	// }
 	// ロケーション設定
 	jst, err := time.LoadLocation("Asia/Tokyo")
 	if err != nil {
