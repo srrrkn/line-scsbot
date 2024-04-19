@@ -20,6 +20,7 @@ services:
     tty: true
     networks:
       - nsnetwork
+    entrypoint: /go/cmd/webhook-scs/main
 
 networks:
   nsnetwork:
